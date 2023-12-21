@@ -1,3 +1,54 @@
 .App {
   text-align: center;
 }
+
+.tile-1 {
+  font-weight: 100;
+  padding-top: 50px;
+  text-align: center;
+  text-align-last: left;
+  width: 1030px;
+  background: transparent;
+}
+
+.tile1-para {
+  font-size: 18px;
+  padding-top: 20px;
+}
+
+.hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.column-1 {
+  padding-left: 400px;
+  margin-left: 0px;
+}
+
+.grid {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.tile1-heading {
+  font-size: 36px;
+}
+
+.tile1-link {
+  font-size: 18px;
+}
+
+.pagination {
+  margin-left: 210px;
+}
+
+.cds--pagination .cds--select__item-count .cds--select-input {
+  background-color: rgb(244, 244, 244);
+}
+
+.cds--pagination__left .cds--pagination__text{
+  font-size: 18px;
+}
