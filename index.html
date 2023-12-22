@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Finding the correct K-TAP version for your Linux kernel</h1>
+<text>
+You can use this application to find the appropriate K-TAP version for your Linux kernel.
+
+<ul>
+<li>Select the Guardium version
+<li>Select the required operating system
+<li>Optionally enter the kernel version - fully or partially
+</ul>
+<p>
+
+If you need to locate your Linux kernel version, use the command 'uname -r' in your Linux terminal or console.
+<p>
+You can download the latest KTAP modules from <a href="https://www.ibm.com/support/fixcentral/">IBM Fix Central</a>
+</text>
+<hr>
+
+<form action="/action_page.php">
+<table>
+<tr>
+  <td>
+  <label for="kernel_string">Kernel:</label>
+  <input type="text" id="kernel_string" name="kernel_string"> 
+  </td>
+</tr>
+<tr>
+<td>
+  <label for="cars">Guardium version:</label>
+  <select name="cars" id="cars">
+    <option value="none">select</option>
+    <option value="saab">Saab</option>
+    <option value="opel">Opel</option>
+    <option value="audi">Audi</option>
+  </select>
+</td>
+
+<td>
+  <label for="bikes">Operating System:</label>
+  <select name="bikes" id="bikes">
+    <option value="none">select</option>
+    <option value="saab">BMW</option>
+    <option value="opel">Harley</option>
+    <option value="audi">Yamaha</option>
+  </select>
+</td>
+</tr>
+</TABLE>
+<p>
+<input type="button" value="Reset selection">
+</form>
+<hr>
+
+</body>
+</html>
+
