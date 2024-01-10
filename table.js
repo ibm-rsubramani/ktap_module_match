@@ -18098,14 +18098,14 @@ function filterTable() {
     var dropdown = document.getElementById('osDropdown');
     var selectedCategory = dropdown.value;
 
-    if (selectedCategory === 'All') {
+    if (selectedCategory == 'All') {
         filteredDataArray = dataArray; // Show all rows
     } else {
         for (var i = 0; i < dataArray.length; i++) {
             const categoryValue = dataArray[i][1];
             console.log('Category Value in Row:', categoryValue); // Debug statement
       
-            if (categoryValue === selectedCategory) {
+            if (categoryValue.includes(selectedCategory)) {
               filteredDataArray.push(dataArray[i]);
             }
           }
@@ -18167,4 +18167,5 @@ function createPageButton(label) {
     return button;
 }
 
-document.getElementById('osDropdown').addEventListener('change', filterTable);
+// document.getElementById('osDropdown').addEventListener('change', filterTable);
+filterTable();
