@@ -18130,7 +18130,7 @@ function filterTable(selectedValueOS, selectedValueVersion) {
         // Show filtered rows for both
         for (var k = 0; k < dataArray.length; k++) {
             const categoryValueOS = dataArray[k][1];
-            const categoryValueVersion = dataArray[i][0];
+            const categoryValueVersion = dataArray[k][0];
       
             var compVal3 = (categoryValueOS === selectedValueOS1) && (categoryValueVersion === selectedValueVersion1);
             console.log(compVal3);
@@ -18237,5 +18237,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fetch and display data based on the stored value
         filterTable(selectedValueOS,selectedValueVersion);
     }
-    localStorage.clear();
+    // localStorage.clear();
 });
