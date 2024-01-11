@@ -18073,6 +18073,7 @@ const paginationContainer = document.getElementById('pagination');
 let currentPage = 1;
 let filteredDataArray = [];
 document.getElementById("kernel_string").size = "40";
+const rowCounter = document.getElementById('rowCounter');
 
 function renderTable(pageNumber) {
 
@@ -18142,11 +18143,15 @@ function filterTable(selectedValueOS, selectedValueVersion) {
               filteredDataArray.push(dataArray[k]);
             }
           }
-}
-    currentPage = 1; // Reset to the first page after filtering
-    renderTable(currentPage);
-    renderPaginationButtons();
-}
+    }   
+    const updateRowCount = () => {
+        rowCounter.textContent = `[Found ${filteredDataArray.length} out of ${dataArray.length} records]`;
+    };
+        currentPage = 1; // Reset to the first page after filtering
+        renderTable(currentPage);
+        renderPaginationButtons();
+        updateRowCount();
+    }
 
 function filterKernel(input){
 
@@ -18159,10 +18164,13 @@ function filterKernel(input){
           filteredDataArray.push(dataArray[m]);
         }
       }
+      const updateRowCount = () => {
+        rowCounter.textContent = `[Found ${filteredDataArray.length} out of ${dataArray.length} records]`;
+      };
       currentPage = 1; // Reset to the first page after filtering
       renderTable(currentPage);
       renderPaginationButtons();
-
+      updateRowCount();
 }
 
 function renderPaginationButtons() {
