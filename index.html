@@ -73,7 +73,8 @@
         <tr>
           <td>
             <label for="version">Guardium version:</label>
-            <select name="version" id="version" oninput="filterTableVersion()">
+            <select name="version" id="versionDropdown" value="All">
+              <option value="All" selected="selected">All</option>
               <option value="9.0">9.0</option>
               <option value="10.1">10.1</option>
               <option value="10.1.2">10.1.2</option>
@@ -96,15 +97,15 @@
             <label for="os">Operating System:</label>
             <select name="os" id="osDropdown" value="All">
               <option value="All" selected="selected">All</option>
-              <option value="RHELi686">RHELi686</option>
-              <option value="RHELia64">RHELia64</option>
-              <option value="RHELppc64">RHELppc64</option>
-              <option value="RHELx86_64">RHELx86_64</option>
-              <option value="SUSEi686">SUSEi686</option>
-              <option value="SUSEppc64">SUSEppc64</option>
-              <option value="SUSEx86_64">SUSEx86_64</option>
-              <option value="Ubuntux86_64">Ubuntux86_64</option>
-              <option value="zLinuxs390x">zLinuxs390x</option>
+              <option value="RHEL-i686">RHELi686</option>
+              <option value="RHEL-ia64">RHELia64</option>
+              <option value="RHEL-ppc64">RHELppc64</option>
+              <option value="RHEL-x86_64">RHELx86_64</option>
+              <option value="SUSE-i686">SUSEi686</option>
+              <option value="SUSE-ppc64">SUSEppc64</option>
+              <option value="SUSE-x86_64">SUSEx86_64</option>
+              <option value="Ubuntu-x86_64">Ubuntux86_64</option>
+              <option value="zLinux-s390x">zLinuxs390x</option>
             </select>
           </td>
         </tr>

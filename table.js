@@ -18071,7 +18071,7 @@ const itemsPerPage = 10;
 const tableBody = document.getElementById('tableBody');
 const paginationContainer = document.getElementById('pagination');
 let currentPage = 1;
-let filteredDataArray = dataArray; // Store the original data
+let filteredDataArray = [];
 
 function renderTable(pageNumber) {
     const start = (pageNumber - 1) * itemsPerPage;
@@ -18093,24 +18093,53 @@ function renderTable(pageNumber) {
         tableBody.appendChild(row);
     });
 }
+  
+function filterTable(selectedValueOS, selectedValueVersion) {
+    var selectedValueOS1 = selectedValueOS;
+    var selectedValueVersion1 = selectedValueVersion;
 
-function filterTable() {
-    var dropdown = document.getElementById('osDropdown');
-    var selectedCategory = dropdown.value;
 
-    if (selectedCategory == 'All') {
+    if (selectedValueOS1 == 'All' && selectedValueVersion1 == 'All') {
         filteredDataArray = dataArray; // Show all rows
-    } else {
+    } else if (selectedValueOS1 == 'All' && selectedValueVersion1 != 'All'){
+        // Show all rows of OS but filtered rows of version
         for (var i = 0; i < dataArray.length; i++) {
-            const categoryValue = dataArray[i][1];
-            console.log('Category Value in Row:', categoryValue); // Debug statement
+            const categoryValueVersion = dataArray[i][0];
       
-            if (categoryValue.includes(selectedCategory)) {
+            var compVal = categoryValueVersion === selectedValueVersion1;
+            console.log(compVal);
+
+            if (compVal != 0) {
               filteredDataArray.push(dataArray[i]);
             }
           }
-}
+    }  else if (selectedValueOS1 != 'All' && selectedValueVersion1 == 'All'){
+        // Show all rows of version but filtered rows of OS
+        for (var j = 0; j < dataArray.length; j++) {
+            const categoryValueOS = dataArray[j][1];
+      
+            var compVal2 = categoryValueOS === selectedValueOS1;
+            console.log(compVal2);
 
+            if (compVal2 != 0) {
+              filteredDataArray.push(dataArray[j]);
+            }
+          }
+    }
+   else {
+        // Show filtered rows for both
+        for (var k = 0; k < dataArray.length; k++) {
+            const categoryValueOS = dataArray[k][1];
+            const categoryValueVersion = dataArray[i][0];
+      
+            var compVal3 = (categoryValueOS === selectedValueOS1) && (categoryValueVersion === selectedValueVersion1);
+            console.log(compVal3);
+
+            if (compVal3 != 0) {
+              filteredDataArray.push(dataArray[k]);
+            }
+          }
+}
     currentPage = 1; // Reset to the first page after filtering
     renderTable(currentPage);
     renderPaginationButtons();
@@ -18167,5 +18196,46 @@ function createPageButton(label) {
     return button;
 }
 
-// document.getElementById('osDropdown').addEventListener('change', filterTable);
-filterTable();
+//RELOADING THE PAGE USING LOCAL STORAGE UPON SELECTION OF AN OPTION
+const osDropdown = document.getElementById('osDropdown');
+
+osDropdown.addEventListener('change', function() {
+    const selectedValueOS = osDropdown.value;
+
+    // Store the selected value in local storage
+    localStorage.setItem('selectedValueOS', selectedValueOS);
+
+    // Reload the page
+    window.location.reload();
+});
+
+const versionDropdown = document.getElementById('versionDropdown');
+
+versionDropdown.addEventListener('change', function() {
+    const selectedValueVersion = versionDropdown.value;
+
+    // Store the selected value in local storage
+    localStorage.setItem('selectedValueVersion', selectedValueVersion);
+    // Reload the page
+    window.location.reload();
+});
+
+// Check for a stored selected value on page load
+document.addEventListener('DOMContentLoaded', function() {
+    var selectedValueOS = localStorage.getItem('selectedValueOS');
+    var selectedValueVersion = localStorage.getItem('selectedValueVersion');
+
+    if(selectedValueOS == null){
+        selectedValueOS = 'All';
+    }
+
+    if(selectedValueVersion == null){
+        selectedValueVersion = 'All';
+    }
+
+    if (selectedValueOS || selectedValueVersion) {
+        // Fetch and display data based on the stored value
+        filterTable(selectedValueOS,selectedValueVersion);
+    }
+    localStorage.clear();
+});
