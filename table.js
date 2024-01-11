@@ -18072,8 +18072,10 @@ const tableBody = document.getElementById('tableBody');
 const paginationContainer = document.getElementById('pagination');
 let currentPage = 1;
 let filteredDataArray = [];
+document.getElementById("kernel_string").size = "40";
 
 function renderTable(pageNumber) {
+
     const start = (pageNumber - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const paginatedData = filteredDataArray.slice(start, end);
@@ -18095,6 +18097,7 @@ function renderTable(pageNumber) {
 }
   
 function filterTable(selectedValueOS, selectedValueVersion) {
+    filteredDataArray = [];
     var selectedValueOS1 = selectedValueOS;
     var selectedValueVersion1 = selectedValueVersion;
 
@@ -18143,6 +18146,23 @@ function filterTable(selectedValueOS, selectedValueVersion) {
     currentPage = 1; // Reset to the first page after filtering
     renderTable(currentPage);
     renderPaginationButtons();
+}
+
+function filterKernel(input){
+
+    filteredDataArray = [];
+    // Get the input and table elements
+    for (var m = 0; m < dataArray.length; m++) {
+        const categoryValueVersion = dataArray[m][2];
+  
+        if (categoryValueVersion.includes(input)) {
+          filteredDataArray.push(dataArray[m]);
+        }
+      }
+      currentPage = 1; // Reset to the first page after filtering
+      renderTable(currentPage);
+      renderPaginationButtons();
+
 }
 
 function renderPaginationButtons() {
@@ -18220,10 +18240,25 @@ versionDropdown.addEventListener('change', function() {
     window.location.reload();
 });
 
+const inputDropdownKernel = document.getElementById("kernel_string");
+const filterButton = document.getElementById('filter_button');
+
+filterButton.addEventListener("click",
+function() {
+    const inputValueKernel = inputDropdownKernel.value;
+
+    // Store the selected value in local storage
+    localStorage.setItem('inputtedKernelValue', inputValueKernel);
+    // Reload the page
+    window.location.reload();
+});
+
+
 // Check for a stored selected value on page load
 document.addEventListener('DOMContentLoaded', function() {
     var selectedValueOS = localStorage.getItem('selectedValueOS');
     var selectedValueVersion = localStorage.getItem('selectedValueVersion');
+    var inputKernelValue = localStorage.getItem('inputtedKernelValue');
 
     if(selectedValueOS == null){
         selectedValueOS = 'All';
@@ -18235,7 +18270,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (selectedValueOS || selectedValueVersion) {
         // Fetch and display data based on the stored value
+        var selectedIndexOS = osDropdown.selectedIndex;
+        osDropdown.options[selectedIndexOS].text = selectedValueOS;
+
+        var selectedIndexVersion = osDropdown.selectedIndex;
+        versionDropdown.options[selectedIndexVersion].text = selectedValueVersion;
+
         filterTable(selectedValueOS,selectedValueVersion);
     }
-    // localStorage.clear();
+
+    if(inputKernelValue != null){
+        filterKernel(inputKernelValue);
+    }
+    
 });
+
+function resetSelection(){
+    localStorage.clear(); 
+    window.location.reload();
+}
