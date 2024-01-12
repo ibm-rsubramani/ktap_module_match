@@ -18069,7 +18069,7 @@ var dataArray = data.map((item) => item.split(","));
 
 const itemsPerPage = 10;
 const tableBody = document.getElementById('tableBody');
-const paginationContainer = document.getElementById('pagination');
+const paginationDiv = document.getElementById('pagination');
 let currentPage = 1;
 let filteredDataArray = [];
 document.getElementById("kernel_string").size = "40";
@@ -18175,9 +18175,9 @@ function filterKernel(input){
 
 function renderPaginationButtons() {
     const pageCount = Math.ceil(filteredDataArray.length / itemsPerPage);
-    const maxPagesToShow = 10;
+    const maxPageButtons = 10;
 
-    paginationContainer.innerHTML = '';
+    paginationDiv.innerHTML = '';
 
     const prevButton = createPageButton('Previous');
     prevButton.addEventListener('click', () => {
@@ -18187,10 +18187,10 @@ function renderPaginationButtons() {
             renderPaginationButtons();
         }
     });
-    paginationContainer.appendChild(prevButton);
+    paginationDiv.appendChild(prevButton);
 
-    const startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-    const endPage = Math.min(startPage + maxPagesToShow - 1, pageCount);
+    const startPage = Math.max(1, currentPage - Math.floor(maxPageButtons / 2));
+    const endPage = Math.min(startPage + maxPageButtons - 1, pageCount);
 
     for (let i = startPage; i <= endPage; i++) {
         const button = createPageButton(i);
@@ -18199,7 +18199,7 @@ function renderPaginationButtons() {
             renderTable(currentPage);
             renderPaginationButtons();
         });
-        paginationContainer.appendChild(button);
+        paginationDiv.appendChild(button);
     }
 
     const nextButton = createPageButton('Next');
@@ -18210,7 +18210,7 @@ function renderPaginationButtons() {
             renderPaginationButtons();
         }
     });
-    paginationContainer.appendChild(nextButton);
+    paginationDiv.appendChild(nextButton);
 }
 
 function createPageButton(label) {
