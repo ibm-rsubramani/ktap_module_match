@@ -8,11 +8,17 @@
       width: 70%;
       margin-bottom: 20px;
       margin-top: 20px;
+      font-size: 18px;
+    }
+
+    #myTable thead{
+      background: #4178be;
+      color: white;
     }
 
     #myTable th,
     #myTable td {
-      border: 1px solid #ddd;
+      border: 1px solid lightgray;
       padding: 8px;
       text-align: left;
     }
@@ -26,15 +32,17 @@
     }
 
     #pagination button {
-      margin: 4px;
       padding: 4px;
       cursor: pointer;
       width: 50%;
       align-items: center;
+      color: #4178be;
+      background-color: white;
+      border: 1px solid #dee2e6;
     }
 
     #pagination button.active {
-      background-color: #0f62fe;
+      background-color: #4178be;
       color: white;
     }
 
@@ -46,12 +54,45 @@
     }
 
     #kernel_string {
-      margin-left: 72.5px;
+      margin-left: 86.5px;
+      height: 30px;
+      padding-left: 3px;
     }
 
     #emptyTable {
       width: 60%;
       margin-left: 75px;
+      color: gray;
+    }
+    #table1 td {
+      padding-top: 10px;
+    }
+
+    #filter_button {
+      background: #0f62fe;
+      color: white;
+      height: 35px;
+      margin-left: 10px;
+      width: 150px;
+    }
+
+    #reset {
+      background: rgb(57, 57, 57);
+      color: white;
+      height: 35px;
+      width: 150px;
+    }
+
+    #content text, label{
+      font-size: 18px;
+    }
+
+    #table1 select{
+      height: 30px;
+      margin-left: 5px;
+    }
+
+    #rowCounter{
       color: gray;
     }
   </style>
@@ -117,6 +158,8 @@
             <option value="12.0">12.0</option>
           </select>
         </td>
+      </tr>
+      <tr>
         <td>
           <label for="os">Operating System:</label>
           <select name="os" id="osDropdown" value="All">
@@ -141,7 +184,6 @@
     <table id="myTable">
       <thead>
         <tr>
-          <!-- Table header rows-->
           <th>Guardium Version</th>
           <th>Operating System</th>
           <th>Kernel</th>
@@ -151,7 +193,6 @@
         </tr>
       </thead>
       <tbody id="tableBody">
-        <!-- Table body rows-->
       </tbody>
     </table>
     <p id="emptyTable"></p>
