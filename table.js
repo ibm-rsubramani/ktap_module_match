@@ -18209,8 +18209,18 @@ function filterTable(selectedValueOS, selectedValueVersion, inputKernelValue) {
         rowCounter.textContent = `[Found ${filteredDataArray.length} out of ${dataArray.length} records]`;
     };
         currentPage = 1; // Reset to the first page after filtering
-        renderTable(currentPage);
-        renderPaginationButtons();
+        
+        if(filteredDataArray.length === 0){
+        //No match found
+            console.log("No rows found!");
+            emptyDiv.innerHTML = 
+            "No matching K-TAP module found.  Please check your filters.  If they are correct, please contact Guardium Support with the following information:<br><ul><li>The Guardium S-TAP version</li><li>The Operating System version and architecture</li><li>The output of 'uname -r'</li>";
+        }
+        else{
+            renderTable(currentPage);
+            renderPaginationButtons();
+        }
+        
         updateRowCount();
     }
 
@@ -18309,12 +18319,12 @@ versionDropdown.addEventListener('change', function() {
     window.location.reload();
 });
 
-const inputDropdownKernel = document.getElementById("kernel_string");
+const inputTextboxKernel = document.getElementById("kernel_string");
 const filterButton = document.getElementById('filter_button');
 
 filterButton.addEventListener("click",
 function() {
-    const inputValueKernel = inputDropdownKernel.value;
+    const inputValueKernel = inputTextboxKernel.value;
 
     // Store the selected value in local storage
     localStorage.setItem('inputtedKernelValue', inputValueKernel);
@@ -18344,6 +18354,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var selectedIndexVersion = osDropdown.selectedIndex;
         versionDropdown.options[selectedIndexVersion].text = selectedValueVersion;
+
+        if(inputKernelValue != null) inputTextboxKernel.setAttribute("value",inputKernelValue);
 
         filterTable(selectedValueOS,selectedValueVersion,inputKernelValue);
     }
